@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protozoan Diseases & Plasmodium Life Cycle - ISC Biology</title>
+  <meta name="description" content="In-depth, interactive biology presentation on Protozoan Diseases including Amoebiasis, Malaria, and complete step-by-step Life Cycle of Plasmodium (Asexual and Sexual Phases).">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-microscope"></i>
+      </div>
+      <div class="brand-text">
+        <span class="subject-tag">ISC BIOLOGY CLASS XII</span>
+        <h1>Protozoan Diseases & Plasmodium</h1>
+      </div>
+    </div>
+
+    <!-- Mode Switcher -->
+    <nav class="mode-nav">
+      <button class="nav-btn active" data-mode="presentation" title="Slide Presentation Mode">
+        <i class="fa-solid fa-file-powerpoint"></i> Slides Mode
+      </button>
+      <button class="nav-btn" data-mode="interactive-cycle" title="Interactive Plasmodium Life Cycle Simulator">
+        <i class="fa-solid fa-diagram-project"></i> Interactive Life Cycle
+      </button>
+      <button class="nav-btn" data-mode="diagram-textbook" title="Textbook Diagram Fig 9.3">
+        <i class="fa-solid fa-book-open-reader"></i> Fig 9.3 Diagram
+      </button>
+      <button class="nav-btn" data-mode="mindmap" title="Interactive Disease Mind Map">
+        <i class="fa-solid fa-sitemap"></i> Mind Map
+      </button>
+      <button class="nav-btn" data-mode="quiz" title="Student Study & Quiz Mode">
+        <i class="fa-solid fa-graduation-cap"></i> Student Quiz & Terms
+      </button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button id="toggle-fullscreen" class="icon-action-btn" title="Toggle Fullscreen">
+        <i class="fa-solid fa-expand"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main id="app-container">
+    <!-- PRESENTATION SLIDE MODE -->
+    <section id="presentation-view" class="view-section active">
+      <div class="slide-wrapper">
+        <!-- Slide Sidebar Navigation -->
+        <aside class="slide-sidebar">
+          <div class="sidebar-header">
+            <h3><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
+            <span class="slide-count-badge" id="sidebar-slide-count">1 / 12</span>
+          </div>
+          <ul class="slide-list" id="slide-list-items">
+            <!-- Populated dynamically -->
+          </ul>
+          
+          <!-- Embedded Mini Mind Map Widget -->
+          <div class="sidebar-mindmap-box">
+            <div class="mini-mm-header">
+              <span><i class="fa-solid fa-sitemap"></i> Mind Map Quick View</span>
+              <button class="btn-xs" id="quick-mm-modal-btn">Enlarge</button>
+            </div>
+            <div class="mini-mm-preview" id="sidebar-mm-preview">
+              <!-- Mini interactive preview -->
+            </div>
+          </div>
+        </aside>
+
+        <!-- Active Slide Container -->
+        <div class="slide-viewport">
+          <div class="slide-content-card" id="slide-content">
+            <!-- Slide render target -->
+          </div>
+
+          <!-- Slide Controls Bar -->
+          <footer class="slide-controls">
+            <div class="controls-left">
+              <button id="prev-slide-btn" class="ctrl-btn" title="Previous Slide (Left Arrow)">
+                <i class="fa-solid fa-chevron-left"></i> Previous
+              </button>
+              <button id="next-slide-btn" class="ctrl-btn primary" title="Next Slide (Right Arrow or Space)">
+                Next <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <button id="autoplay-btn" class="ctrl-btn secondary" title="Auto Play Slides">
+                <i class="fa-solid fa-play"></i> Auto Play
+              </button>
+            </div>
+            <div class="slide-indicator">
+              <span id="current-slide-num">1</span> of <span id="total-slides-num">12</span>
+            </div>
+            <div class="controls-right">
+              <button class="ctrl-btn outline" id="open-interactive-from-slide">
+                <i class="fa-solid fa-arrows-spin"></i> Open Life Cycle Simulator
+              </button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LIFE CYCLE SIMULATOR MODE -->
+    <section id="interactive-cycle-view" class="view-section">
+      <div class="cycle-container">
+        <!-- Life Cycle Control Header -->
+        <div class="cycle-header">
+          <div class="cycle-title">
+            <h2><i class="fa-solid fa-arrows-spin"></i> Life Cycle of <em>Plasmodium vivax</em> (Interactive Map)</h2>
+            <p>Click any stage node or use the progression buttons below to trace the complete Digenetic Life Cycle (Asexual in Man & Sexual in Mosquito).</p>
+          </div>
+          <div class="cycle-filters">
+            <button class="filter-chip active" data-host="all">All Stages</button>
+            <button class="filter-chip man-chip" data-host="man"><i class="fa-solid fa-user"></i> Host 1: Man (Asexual)</button>
+            <button class="filter-chip mosquito-chip" data-host="mosquito"><i class="fa-solid fa-bug"></i> Host 2: Mosquito (Sexual)</button>
+          </div>
+        </div>
+
+        <!-- Split Stage Visualizer -->
+        <div class="cycle-stage-grid">
+          <!-- Left/Top: Interactive Flow Map -->
+          <div class="cycle-map-card">
+            <div class="map-toolbar">
+              <span class="active-stage-label" id="cycle-active-step-label">Stage 1: Mosquito Bite & Sporozoite Transfer</span>
+              <div class="step-nav-buttons">
+                <button id="cycle-prev-step" class="btn-sm"><i class="fa-solid fa-arrow-left"></i> Previous Stage</button>
+                <button id="cycle-next-step" class="btn-sm primary">Next Stage <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- SVG Animated Interactive Diagram -->
+            <div class="svg-diagram-wrapper" id="interactive-svg-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Right/Bottom: In-Depth Biology Detail Card -->
+          <div class="cycle-detail-card" id="cycle-detail-panel">
+            <!-- Dynamic detailed breakdown for selected stage -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEXTBOOK DIAGRAM FIG 9.3 MODE -->
+    <section id="diagram-textbook-view" class="view-section">
+      <div class="textbook-diag-container">
+        <div class="tb-diag-header">
+          <div>
+            <h2><i class="fa-solid fa-book-open"></i> Fig 9.3: Diagrammatic Life Cycle of Malaria Parasite</h2>
+            <p>Exact replica of textbook diagram flow for <em>Plasmodium vivax</em> showing Sexual cycle in Mosquito (gut) and Asexual cycle in Man (liver & RBCs).</p>
+          </div>
+          <div class="tb-view-toggle">
+            <button class="btn-sm active" id="tb-hotspots-toggle"><i class="fa-solid fa-eye"></i> Show Interactive Hotspots</button>
+          </div>
+        </div>
+
+        <div class="tb-diagram-viewport">
+          <!-- Vectorized Replica of Textbook Figure 9.3 -->
+          <div class="fig-9-3-canvas" id="fig-9-3-board">
+            <!-- Built dynamically with SVG + Hotspots -->
+          </div>
+
+          <!-- Dynamic Hotspot Explanation Sidebar -->
+          <div class="fig-info-box" id="fig-info-sidebar">
+            <div class="fig-info-header">
+              <span class="badge-tag" id="fig-info-tag">MOSQUITO GUT</span>
+              <h3 id="fig-info-title">Gametogony & Fertilisation</h3>
+            </div>
+            <div class="fig-info-body" id="fig-info-text">
+              Select any stage box or arrow on the diagram to highlight the biological mechanism, cellular changes, and key textbook terms.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIND MAP MODE -->
+    <section id="mindmap-view" class="view-section">
+      <div class="mindmap-container">
+        <div class="mm-header">
+          <div>
+            <h2><i class="fa-solid fa-sitemap"></i> Comprehensive Mind Map of Protozoan Diseases</h2>
+            <p>Interactive biological hierarchy covering Amoebiasis and Malaria (Causative agents, vectors, clinical features, life cycles, and prevention).</p>
+          </div>
+          <div class="mm-actions">
+            <button class="btn-sm" id="expand-all-mm"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Expand All</button>
+            <button class="btn-sm" id="collapse-all-mm"><i class="fa-solid fa-down-left-and-up-right-to-center"></i> Collapse All</button>
+          </div>
+        </div>
+
+        <div class="mm-board" id="main-mindmap-canvas">
+          <!-- Mind map rendered here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDENT QUIZ & GLOSSARY MODE -->
+    <section id="quiz-view" class="view-section">
+      <div class="quiz-container">
+        <div class="quiz-tabs">
+          <button class="quiz-tab-btn active" data-tab="quiz-questions">
+            <i class="fa-solid fa-circle-question"></i> Practice Quiz & Self-Test
+          </button>
+          <button class="quiz-tab-btn" data-tab="glossary-terms">
+            <i class="fa-solid fa-spell-check"></i> Key Biological Terms & Glossary
+          </button>
+          <button class="quiz-tab-btn" data-tab="comparison-tables">
+            <i class="fa-solid fa-table-list"></i> Summary Tables (Species & Phases)
+          </button>
+        </div>
+
+        <!-- Tab 1: Quiz -->
+        <div class="quiz-tab-content active" id="quiz-questions-tab">
+          <div class="quiz-card-box">
+            <div class="quiz-progress-bar">
+              <div class="progress-fill" id="quiz-progress"></div>
+            </div>
+            <div class="quiz-header-info">
+              <span id="quiz-q-num">Question 1 of 8</span>
+              <span class="score-badge" id="quiz-score">Score: 0</span>
+            </div>
+            <div class="quiz-body" id="quiz-question-body">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Glossary -->
+        <div class="quiz-tab-content" id="glossary-terms-tab">
+          <div class="glossary-search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="glossary-search-input" placeholder="Search biological terms (e.g., Haemozoin, Ookinete, Exflagellation, Cryptomerozoite)...">
+          </div>
+          <div class="glossary-grid" id="glossary-grid-container">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Tables -->
+        <div class="quiz-tab-content" id="comparison-tables-tab">
+          <div class="tables-grid">
+            <div class="table-card">
+              <h3><i class="fa-solid fa-table"></i> Species of <em>Plasmodium</em> & Malaria Types</h3>
+              <table class="bio-table">
+                <thead>
+                  <tr>
+                    <th>Species Name</th>
+                    <th>Type of Malaria</th>
+                    <th>Fever Cycle Duration</th>
+                    <th>Severity / Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>Plasmodium vivax</em></td>
+                    <td>Benign Tertian Malaria</td>
+                    <td>Every 48 hours (3rd day)</td>
+                    <td>Most common, non-fatal generally</td>
+                  </tr>
+                  <tr>
+                    <td><em>Plasmodium falciparum</em></td>
+                    <td>Malignant Tertian Malaria</td>
+                    <td>Every 48 hours</td>
+                    <td>Most dangerous, can be fatal</td>
+                  </tr>
+                  <tr>
+                    <td><em>Plasmodium malariae</em></td>
+                    <td>Quartan Malaria</td>
+                    <td>Every 72 hours (4th day)</td>
+                    <td>Longer latency period</td>
+                  </tr>
+                  <tr>
+                    <td><em>Plasmodium ovale</em></td>
+                    <td>Ovale Tertian Malaria</td>
+                    <td>Every 48 hours</td>
+                    <td>Relatively rare</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-card">
+              <h3><i class="fa-solid fa-code-compare"></i> Comparison: Asexual vs Sexual Phase</h3>
+              <table class="bio-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Asexual Phase (In Man)</th>
+                    <th>Sexual Phase (In Mosquito)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Host Type</td>
+                    <td>Primary / Intermediate Host (Man)</td>
+                    <td>Secondary Host & Vector (Female <em>Anopheles</em>)</td>
+                  </tr>
+                  <tr>
+                    <td>Location</td>
+                    <td>Intracellular (Liver hepatocytes & Red Blood Cells)</td>
+                    <td>Extracellular (Gut lumen, gut wall, haemocoel, salivary glands)</td>
+                  </tr>
+                  <tr>
+                    <td>Processes</td>
+                    <td>Pre- & Exo-erythrocytic schizogony, Erythrocytic schizogony, Gametocytosis</td>
+                    <td>Gametogenesis (Exflagellation), Fertilisation, Encystment, Sporogony</td>
+                  </tr>
+                  <tr>
+                    <td>Ploidy</td>
+                    <td>Haploid (n)</td>
+                    <td>Gametocytes (n), Zygote/Ookinete (2n), Sporozoites (n)</td>
+                  </tr>
+                  <tr>
+                    <td>Pathological Effects</td>
+                    <td>Causes malaria symptoms (chills/fever from haemozoin release)</td>
+                    <td>No pathogenic symptoms in mosquito vector</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for Enlarged Mind Map -->
+  <div class="modal-overlay" id="mm-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sitemap"></i> Interactive Protozoan Diseases Mind Map</h3>
+        <button class="close-modal-btn" id="close-mm-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-mm-container">
+        <!-- Mind map clone -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
